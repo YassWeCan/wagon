@@ -54,6 +54,9 @@ plugins:
 #   - vendor/gems/
 #   - vendor/ruby/
 
+exclude:
+  - profilplus-video-report/
+
 collections:
   products:
     output: true

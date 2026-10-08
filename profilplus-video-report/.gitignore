@@ -1,0 +1,7 @@
+node_modules/
+out/
+.env
+data/brut-*.json
+public/voice/*.mp3
+data/rapport.json
+data/script-voix.txt
