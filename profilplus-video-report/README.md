@@ -119,28 +119,36 @@ npm run fetch
 
 ## ☐ Étape 5 — La voix off
 
-⏱ 10 min
+⏱ 2 min (gratuit) à 10 min (ElevenLabs)
 
-Le texte est écrit **automatiquement à partir des chiffres** (pas d'IA ➜ aucun chiffre inventé). Tu peux le modifier dans `scripts/narration.mjs`.
+Le texte est écrit **automatiquement à partir des chiffres** (pas d'IA ➜ aucun chiffre inventé). Pour le modifier : `scripts/narration.mjs`.
 
-**Option A — automatique (recommandé)**
-1. Crée un compte sur https://elevenlabs.io (offre payante d'entrée de gamme suffisante pour quelques vidéos/mois — vérifie le tarif actuel).
-2. Choisis une voix française dans « Voices » ➜ copie son **Voice ID**.
-3. Profil ➜ « API Keys » ➜ crée une clé.
-4. Colle les deux dans `.env` (`ELEVENLABS_API_KEY`, `ELEVENLABS_VOICE_ID`).
-5. Lance :
+⚠️ **Sans cette étape, la vidéo est muette.** Elle n'est pas facultative.
+
+**Option 1 — gratuite, tout de suite (pour tester)**
 
 ```bash
 npm run voice
 ```
 
-**Option B — à la main (sans clé API)**
-1. `npm run voice` ➜ ouvre `data/script-voix.txt`.
-2. Colle chaque paragraphe dans ElevenLabs (ou n'importe quel outil de voix), télécharge le MP3.
-3. Range-le dans `public/voice/` avec **exactement** le nom indiqué (`intro.mp3`, `kpis.mp3`, …).
-4. Relance `npm run voice` (il mesure la durée des MP3).
+Sans clé ElevenLabs, le script utilise la voix française intégrée à ton ordinateur (Mac : « Thomas » ; Windows : la voix française installée).
+Qualité « GPS » : bien pour vérifier la synchro, **pas assez bien pour envoyer à un adhérent**.
+(Mac : pour une voix plus naturelle, Réglages ➜ Accessibilité ➜ Contenu énoncé ➜ Voix du système ➜ Gérer les voix ➜ télécharge « Thomas (Premium) » ou « Amélie (Premium) », puis ajoute `VOIX_MAC=Amélie (Premium)` dans `.env`.)
 
-✅ C'est bon si : `✅ 6 piste(s) voix prêtes`. La vidéo s'allonge toute seule pour suivre la voix.
+**Option 2 — voix pro ElevenLabs (pour la vraie vidéo)**
+1. Crée un compte sur https://elevenlabs.io (le petit abonnement payant suffit pour quelques vidéos/mois — vérifie le tarif actuel).
+2. « Voices » ➜ choisis une voix française ➜ copie son **Voice ID**.
+3. Profil ➜ « API Keys » ➜ crée une clé.
+4. Colle les deux dans `.env` (`ELEVENLABS_API_KEY=…` et `ELEVENLABS_VOICE_ID=…`).
+5. Relance `npm run voice`.
+
+**Option 3 — à la main (n'importe quel outil de voix)**
+1. Ouvre `data/script-voix.txt` (créé par `npm run voice`).
+2. Pour chaque paragraphe : génère la voix, télécharge le MP3, range-le dans `public/voice/` avec **exactement** le nom indiqué (`intro.mp3`, `kpis.mp3`, …).
+3. Relance `npm run voice` ➜ il détecte tes MP3 et mesure leur durée.
+
+✅ C'est bon si : `✅ 6 pistes voix prêtes`. La vidéo s'allonge toute seule pour suivre la voix.
+🆘 `401` ➜ clé fausse · `404` ➜ Voice ID faux · `quota` ➜ plus de crédits ElevenLabs.
 
 ---
 
